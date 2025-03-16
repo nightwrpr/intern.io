@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฟอร์มประเมินพี่เลี้ยง</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #000080;
+        }
+
+        .category {
+            margin-top: 30px;
+        }
+
+        .category h2 {
+            color: #000080;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #000080;
+            color: white;
+        }
+
+        input[type="radio"] {
+            transform: scale(1.2);
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #000080;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .left-align {
+            text-align: left;
+            /* ทำให้ข้อความใน <td> ชิดซ้าย */
+            padding-left: 15px;
+            /* เพิ่มระยะห่างทางซ้าย */
+        }
+
+        .comment-section {
+            margin-top: 20px;
+        }
+
+        .comment-section textarea {
+            width: 100%;
+            padding: 10px;
+            height: 100px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>แบบฟอร์มประเมินพี่เลี้ยง</h1>
+        <form action="/submit_evaluation" method="post">
+
+            <!-- หมวดหมู่ 1: คุณภาพงาน -->
+            <div class="category">
+                <h2>1. ความรู้และความสามารถในการทำงาน (Knowledge and Ability)
+
+                </h2>
+                <table>
+                    <tr>
+                        <th>หัวข้อการประเมิน</th>
+                        <th>5</th>
+                        <th>4</th>
+                        <th>3</th>
+                        <th>2</th>
+                        <th>1</th>
+                    </tr>
+                    <tr>
+                        <td class="left-align">1.1 คุณภาพงาน (Quality)</td>
+                        <td><input type="radio" name="q1.1" value="5"></td>
+                        <td><input type="radio" name="q1.1" value="4"></td>
+                        <td><input type="radio" name="q1.1" value="3"></td>
+                        <td><input type="radio" name="q1.1" value="2"></td>
+                        <td><input type="radio" name="q1.1" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-align">1.2 ความสามารถในการเรียนรู้และประยุกต์วิชาการ (Learning Ability and
+                            Adapting)
+
+                        </td>
+                        <td><input type="radio" name="q1.2" value="5"></td>
+                        <td><input type="radio" name="q1.2" value="4"></td>
+                        <td><input type="radio" name="q1.2" value="3"></td>
+                        <td><input type="radio" name="q1.2" value="2"></td>
+                        <td><input type="radio" name="q1.2" value="1"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- หมวดหมู่ 2: ความรับผิดชอบ -->
+            <div class="category">
+                <h2>2. ความรับผิดชอบในการปฏิบัติงานที่ได้รับมอบหมาย (Responsibility)</h2>
+                <table>
+                    <tr>
+                        <th>หัวข้อการประเมิน</th>
+                        <th>5</th>
+                        <th>4</th>
+                        <th>3</th>
+                        <th>2</th>
+                        <th>1</th>
+                    </tr>
+                    <tr>
+                        <td class="left-align">2.1 ความรับผิดชอบและเป็นผู้ที่ไว้วางใจได้ (Responsibility and
+                            Dependability)
+
+                        </td>
+                        <td><input type="radio" name="q2.1" value="5"></td>
+                        <td><input type="radio" name="q2.1" value="4"></td>
+                        <td><input type="radio" name="q2.1" value="3"></td>
+                        <td><input type="radio" name="q2.1" value="2"></td>
+                        <td><input type="radio" name="q2.1" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-align">2.2 การตรงต่อเวลา (Punctuality)
+
+                        </td>
+                        <td><input type="radio" name="q2.2" value="5"></td>
+                        <td><input type="radio" name="q2.2" value="4"></td>
+                        <td><input type="radio" name="q2.2" value="3"></td>
+                        <td><input type="radio" name="q2.2" value="2"></td>
+                        <td><input type="radio" name="q2.2" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-align">2.3 ความสนใจ อุตสาหะ และมุ่งมั่นทำงานให้สำเร็จ (Working Attention and
+                            Intention)
+                        </td>
+                        <td><input type="radio" name="q2.3" value="5"></td>
+                        <td><input type="radio" name="q2.3" value="4"></td>
+                        <td><input type="radio" name="q2.3" value="3"></td>
+                        <td><input type="radio" name="q2.3" value="2"></td>
+                        <td><input type="radio" name="q2.3" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-align">2.4 ความเอาใจใส่ต่อผู้รับบริการ (Customer Attention)
+
+                        </td>
+                        <td><input type="radio" name="q2.4" value="5"></td>
+                        <td><input type="radio" name="q2.4" value="4"></td>
+                        <td><input type="radio" name="q2.4" value="3"></td>
+                        <td><input type="radio" name="q2.4" value="2"></td>
+                        <td><input type="radio" name="q2.4" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-align">2.5 ความสามารถเริ่มต้นทำงานได้ด้วยตนเอง (Ability of Learning and
+                            Performing Assign Job)
+
+
+
+                        </td>
+                        <td><input type="radio" name="q2.5" value="5"></td>
+                        <td><input type="radio" name="q2.5" value="4"></td>
+                        <td><input type="radio" name="q2.5" value="3"></td>
+                        <td><input type="radio" name="q2.5" value="2"></td>
+                        <td><input type="radio" name="q2.5" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-align">2.6 การตอบสนองต่อการสั่งการ (Response to Supervision)
+
+                        </td>
+                        <td><input type="radio" name="q2.6" value="5"></td>
+                        <td><input type="radio" name="q2.6" value="4"></td>
+                        <td><input type="radio" name="q2.6" value="3"></td>
+                        <td><input type="radio" name="q2.6" value="2"></td>
+                        <td><input type="radio" name="q2.6" value="1"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- หมวดหมู่ 3: บุคลิกภาพ -->
+            <div class="category">
+                <h2>3. ลักษณะส่วนบุคคล (Personality)</h2>
+                <table>
+                    <tr>
+                        <th>หัวข้อการประเมิน</th>
+                        <th>5</th>
+                        <th>4</th>
+                        <th>3</th>
+                        <th>2</th>
+                        <th>1</th>
+                    </tr>
+                    <tr>
+                        <td class="left-align">3.1 บุคลิกภาพ (Personality) ได้แก่ ทัศนคติ วุฒิภาวะ ความอ่อนน้อมถ่อมตน
+                            การแต่งกาย การแสดงออก
+                            ความเชื่อมั่นในตนเอง ความเป็นผู้นำ </td>
+                        <td><input type="radio" name="q3.1" value="5"></td>
+                        <td><input type="radio" name="q3.1" value="4"></td>
+                        <td><input type="radio" name="q3.1" value="3"></td>
+                        <td><input type="radio" name="q3.1" value="2"></td>
+                        <td><input type="radio" name="q3.1" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-align">3.2 มนุษยสัมพันธ์และความสามารถในการทำงานร่วมกับผู้อื่น (Interpersonal
+                            Relation and
+                            Cooperation Relationship)</td>
+                        <td><input type="radio" name="q3.2" value="5"></td>
+                        <td><input type="radio" name="q3.2" value="4"></td>
+                        <td><input type="radio" name="q3.2" value="3"></td>
+                        <td><input type="radio" name="q3.2" value="2"></td>
+                        <td><input type="radio" name="q3.2" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-align">3.3 การวางตัวและการปรับตัวเข้ากับองค์กรได้เหมาะสม (Position and
+                            Flexibility)</td>
+                        <td><input type="radio" name="q3.3" value="5"></td>
+                        <td><input type="radio" name="q3.3" value="4"></td>
+                        <td><input type="radio" name="q3.3" value="3"></td>
+                        <td><input type="radio" name="q3.3" value="2"></td>
+                        <td><input type="radio" name="q3.3" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-align">3.4 การรู้จักประมาณตน (Self-estimate)
+
+                        </td>
+                        <td><input type="radio" name="q3.4" value="5"></td>
+                        <td><input type="radio" name="q3.4" value="4"></td>
+                        <td><input type="radio" name="q3.4" value="3"></td>
+                        <td><input type="radio" name="q3.4" value="2"></td>
+                        <td><input type="radio" name="q3.4" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-align">3.5 ความมีระเบียบวินัย (Discipline)</td>
+                        <td><input type="radio" name="q3.5" value="5"></td>
+                        <td><input type="radio" name="q3.5" value="4"></td>
+                        <td><input type="radio" name="q3.5" value="3"></td>
+                        <td><input type="radio" name="q3.5" value="2"></td>
+                        <td><input type="radio" name="q3.5" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-align">3.6 คุณธรรมและจริยธรรม (Moral and Ethical Behavior)</td>
+                        <td><input type="radio" name="q3.6" value="5"></td>
+                        <td><input type="radio" name="q3.6" value="4"></td>
+                        <td><input type="radio" name="q3.6" value="3"></td>
+                        <td><input type="radio" name="q3.6" value="2"></td>
+                        <td><input type="radio" name="q3.6" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-align">3.7 ทักษะการสื่อสารและการนำเสนอ (Communication and Presentation Skill)
+                        </td>
+                        <td><input type="radio" name="q3.7" value="5"></td>
+                        <td><input type="radio" name="q3.7" value="4"></td>
+                        <td><input type="radio" name="q3.7" value="3"></td>
+                        <td><input type="radio" name="q3.7" value="2"></td>
+                        <td><input type="radio" name="q3.7" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-align">3.8 ความคิดสร้างสรรค์ในการปฏิบัติงาน (Creativity in Performance)</td>
+                        <td><input type="radio" name="q3.8" value="5"></td>
+                        <td><input type="radio" name="q3.8" value="4"></td>
+                        <td><input type="radio" name="q3.8" value="3"></td>
+                        <td><input type="radio" name="q3.8" value="2"></td>
+                        <td><input type="radio" name="q3.8" value="1"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- รวมคะแนน -->
+            <div class="category">
+                <h2>รวมคะแนน</h2>
+                <p id="totalScore">--</p>
+            </div>
+            
+            <div class="comment-section">
+                <label for="additionalComments">แสดงความคิดเห็นเพิ่มเติม:</label>
+                <textarea name="additionalComments" id="additionalComments"
+                    placeholder="กรุณาใส่ความคิดเห็นของคุณที่นี่..." required></textarea>
+            </div>
+
+            <button type="submit">ส่งการประเมิน</button>
+        </form>
+    </div>
+    <script>
+        function calculateTotal() {
+            let total = 0;
+            const radios = document.querySelectorAll('input[type="radio"]:checked'); // ดึง radio ที่ถูกเลือก
+
+            radios.forEach(radio => {
+                total += parseInt(radio.value); // คำนวณผลรวมจากค่าของ radio ที่เลือก
+            });
+
+            // แสดงคะแนนรวมใน <p> ที่มี id="totalScore"
+            document.getElementById('totalScore').textContent = total;
+        }
+
+        // เพิ่มฟังก์ชันนี้ในทุก radio button เพื่อให้มันคำนวณคะแนนใหม่ทุกครั้งที่เลือก
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            radio.addEventListener('change', calculateTotal);
+        });
+    </script>
+
+</body>
+
+</html>

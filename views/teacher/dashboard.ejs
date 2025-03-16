@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ลบแท็ก <link> ที่เปิดแบบไม่ถูกต้อง -->
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=block">
+
+    <title>Welcome</title>
+</head>
+
+<body>
+    <div id="sidebar-container"></div>
+    <%- include('../partials/sidebar', { user: teacher }) %>
+
+
+
+        <div class="main-content">
+            <div class="header">
+                <span class="material-symbols-outlined">menu</span>
+                <h5 class="mb-0">หน้าแรก</h5>
+                <span class="material-symbols-outlined">more_vert</span>
+            </div>
+
+            <div class="content mt-4">
+                <h2><strong>ยินดีต้อนรับ</strong></h2>
+
+                <!-- Card for Quote -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><strong>ข้อมูลของอาจารย์</strong></h5>
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p><strong>
+                                ชื่อ: <%= teacher.name %><br>
+                                อีเมล: <%= teacher.email %>
+                            </strong><br><br>
+                            <strong>บทบาท: </strong>
+                            <%= teacher.role || 'ไม่มีข้อมูล' %>
+                        </p>
+                        </blockquote>
+                    </div>
+                </div>
+
+                <!-- Cards Container -->
+                <div class="container">
+                    <div class="row">
+                        <!-- สถานประกอบการ Card -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><span
+                                            class="material-symbols-outlined">apartment</span>สถานประกอบการ</h5>
+                                    <p class="card-text">ค้นหาสถานประกอบการและตำแหน่งที่นักศึกษาสนใจเพื่อไปฝึกประสบการณ์
+                                    </p>
+                                    <a href="/company" class="btn btn-primary">รายละเอียดเพิ่มเติม</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- เอกสาร Card -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><span
+                                            class="material-symbols-outlined">description</span>เอกสาร
+                                    </h5>
+                                    <p class="card-text">เอกสารที่เกี่ยวข้องกับการยื่นคำร้องไปฝึกประสบการณ์</p>
+                                    <a href="/document" class="btn btn-primary">รายละเอียดเพิ่มเติม</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ประวัติการฝึกประสบการณ์ Card -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><span
+                                            class="material-symbols-outlined">history</span>ประวัติการฝึกประสบการณ์</h5>
+                                    <p class="card-text">รายละเอียดประวัติการฝึกประสบการณ์ของนักศึกษาที่ผ่านมา</p>
+                                    <a href="/history" class="btn btn-primary">รายละเอียดเพิ่มเติม</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer-container"></div>
+        <!-- รวม footer -->
+        <%- include('../partials/footer.html') %>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+                crossorigin="anonymous"></script>
+
+</body>
+
+</html>

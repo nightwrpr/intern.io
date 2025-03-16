@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=block">
+    <title>บันทึกคะแนนการประเมิน</title>
+</head>
+<body>
+    <div id="sidebar-container"></div>
+    <%- include('partials/sidebar', { user: session.user }) %>
+    
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">บันทึกคะแนนการประเมิน</h1>
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center mb-4">แบบประเมินการนำเสนอผลการฝึกปฏิบัติ</h2>
+
+                <form action="/professor/evaluate/<%= student.student_id %>" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label"><strong>ชื่อ - สกุล นักศึกษา:</strong></label>
+                        <input type="text" class="form-control" id="student_name" value="<%= student.student_name %>" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label"><strong>รหัสประจำตัว:</strong></label>
+                        <% if (student && student.student_id) { %>
+                            <input type="text" class="form-control" id="student_id" value="<%= student.student_id %>" disabled>
+                        <% } else { %>
+                            <p class="text-danger">ไม่พบรหัสประจำตัว</p>
+                        <% } %>
+                    </div>                                       
+                    <table class="table table-bordered text-center mt-4">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>หัวข้อการประเมิน</th>
+                                <th>คะแนนเต็ม</th>
+                                <th>คะแนนที่ได้</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">1. เนื้อหาครบถ้วนตามหัวข้อที่กำหนด</td>
+                                <td>15</td>
+                                <td><input type="number" name="score1" class="form-control score-input" min="0" max="15" placeholder="0"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">2. รูปแบบของสื่อเหมาะสมกับเนื้อหาที่นำเสนอ</td>
+                                <td>5</td>
+                                <td><input type="number" name="score2" class="form-control score-input" min="0" max="5" placeholder="0"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">3. ความสวยงามของสื่อที่ใช้</td>
+                                <td>5</td>
+                                <td><input type="number" name="score3" class="form-control score-input" min="0" max="5" placeholder="0"></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2"><strong>รวมคะแนน</strong></td>
+                                <td><input type="text" class="form-control" id="total-score" placeholder="ผลรวมคะแนน" disabled></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <div class="text-end mt-4">
+                        <button type="submit" class="btn btn-success">บันทึกผลการประเมิน</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-container"></div>
+        <!-- รวม footer -->
+        <%- include('partials/footer.html') %>
+
+    <script>
+        // คำนวณคะแนนรวมอัตโนมัติ
+        document.querySelectorAll('.score-input').forEach(input => {
+            input.addEventListener('input', updateTotalScore);
+        });
+
+        function updateTotalScore() {
+            let total = 0;
+            document.querySelectorAll('.score-input').forEach(input => {
+                total += parseInt(input.value) || 0;
+            });
+            document.getElementById('total-score').value = total;
+        }
+    </script>
+</body>
+</html>

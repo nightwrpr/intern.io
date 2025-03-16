@@ -1,0 +1,35 @@
+<div id="sidebar-container" class="sidebar">
+  <div class="user-info">
+      <h3>ยินดีต้อนรับ</h3>
+      <p><%= user.name %> (<%= user.role %>)</p>
+  </div>
+  <ul>
+      <% if (user && user.role === 'student') { %>
+          <li><a href="/index"><span class="material-symbols-outlined">apartment</span>หน้าหลัก</a></li>
+          <li><a href="/company"><span class="material-symbols-outlined">apartment</span> สถานประกอบการ</a></li>
+          <li><a href="/document"><span class="material-symbols-outlined">description</span>เอกสาร</a></li>
+          <li><a href="/reqforintern"><span class="material-symbols-outlined">description</span>ยื่นเอกสาร</a></li>
+          <li><a href="/send_report"><span class="material-symbols-outlined">description</span>ส่งรายงานการฝึกงาน</a></li>
+          <li><a href="/status_std"><span class="material-symbols-outlined">description</span>สถานะคำร้องฝึกงานของนักศึกษา</a></li>
+          <li><a href="/std_profile"><span class="material-symbols-outlined">description</span>ข้อมูลส่วนตัว</a></li>
+      <% } else if (user && user.role === 'Admin') { %>
+          <li><a href="/admin/dashboard">หน้าหลัก</a></li>
+          <li><a href="/add"><span class="material-symbols-outlined">description</span>เพิ่มข้อมูลสถานประกอบการ</a></li>
+          <li><a href="/admin/admin_dashboard"><span class="material-symbols-outlined">description</span>เพิ่มข้อมูลพี่เลี้ยง</a></li>
+      <% } else if (user && user.role === 'teacher') { %>
+          <li><a href="/teacher/dashboard">หน้าหลัก</a></li>
+          <li><a href="/adviser_present_evaluation"><span class="material-symbols-outlined">description</span>บันทึกผลการประเมิน</a></li>
+          <li><a href="/adviser_nites_evaluation"><span class="material-symbols-outlined">description</span>บันทึกผลการประเมินนิเทศ</a></li>
+          <li><a href="/listofrequests"><span class="material-symbols-outlined">description</span>หน้าแสดงยื่นฟอร์มคำร้อง</a></li>
+          <li><a href="/adviser_profile"><span class="material-symbols-outlined">description</span>ข้อมูลส่วนตัว</a></li>
+        <% } else if (user && user.role === 'mentor') { %>
+            <li><a href="/mentor_proflie">หน้าหลัก</a></li>
+            <li><a href="/mentor_evaluation"><span class="material-symbols-outlined">description</span>บันทึกผลการประเมิน</a></li>
+        <% } else if (user && user.role === 'evaluator') { %>
+            <li><a href="/exter_profile">หน้าหลัก</a></li>
+            <li><a href="/externalevaluatorr"><span class="material-symbols-outlined">description</span>บันทึกผลการประเมิน</a></li>
+      <% } %>
+      <!-- เพิ่มปุ่ม Log Out -->
+      <li><a href="/logout"><span class="material-symbols-outlined">exit_to_app</span>ออกจากระบบ</a></li>
+  </ul>
+</div>

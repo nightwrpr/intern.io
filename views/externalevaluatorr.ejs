@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=block">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>อาจารย์นิเทศน์-ประเมินนักศึกษา</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div id="sidebar-container"></div>
+    <%- include('partials/sidebar', { user: session.user }) %>
+
+        <div class="container mt-5">
+            <h1 class="text-center mb-4">แบบประเมินผลการปฏิบัติงานของนักศึกษา</h1>
+
+            <!-- Form for evaluation -->
+            <form action="submit_evaluation.php" method="POST">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>กรุณาค้นหานักศึกษา</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Search for Student -->
+                        <div class="mb-3">
+                            <label for="search" class="form-label">ค้นหานักศึกษาด้วยชื่อหรือรหัสนักศึกษา</label>
+                            <input type="text" class="form-control" id="search" name="search"
+                                placeholder="ชื่อหรือล็อกรหัสนักศึกษา" oninput="searchStudent()">
+                        </div>
+
+                        <!-- Student Information -->
+                        <div class="mb-3">
+                            <label for="student_name" class="form-label">ชื่อ - สกุล นักศึกษา</label>
+                            <input type="text" class="form-control" id="student_name" name="student_name" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="student_id" class="form-label">รหัสประจำตัว</label>
+                            <input type="text" class="form-control" id="student_id" name="student_id" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="major" class="form-label">สาขาวิชา</label>
+                            <input type="text" class="form-control" id="major" name="major"
+                                value="ผู้ประกอบการดิจิทัลและเทคโนโลยีการตลาด" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="company_name" class="form-label">ชื่อสถานประกอบการ</label>
+                            <input type="text" class="form-control" id="company_name" name="company_name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="department_position" class="form-label">แผนก/ตำแหน่งที่ฝึกปฏิบัติ</label>
+                            <input type="text" class="form-control" id="department_position" name="department_position"
+                                required>
+                        </div>
+
+                        <!-- Evaluation Table -->
+                        <h5 class="mt-4">โปรดทำเครื่องหมาย ✔ ลงในช่องระดับการปฏิบัติงานที่ตรงกับความเป็นจริง</h5>
+                        <table class="table table-bordered mt-3">
+                            <thead>
+                                <tr>
+                                    <th>หัวข้อการประเมิน</th>
+                                    <th>ดีเยี่ยม (5)</th>
+                                    <th>ดี (4)</th>
+                                    <th>ปานกลาง (3)</th>
+                                    <th>พอใช้ (2)</th>
+                                    <th>ควรปรับปรุง (1)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1. บุคลิกภาพ วุฒิภาวะ และการแต่งกาย</td>
+                                    <td><input type="radio" name="personality" value="5"></td>
+                                    <td><input type="radio" name="personality" value="4"></td>
+                                    <td><input type="radio" name="personality" value="3"></td>
+                                    <td><input type="radio" name="personality" value="2"></td>
+                                    <td><input type="radio" name="personality" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td>2. ความประพฤติและปฏิบัติตามระเบียบวินัยองค์กร</td>
+                                    <td><input type="radio" name="conduct" value="5"></td>
+                                    <td><input type="radio" name="conduct" value="4"></td>
+                                    <td><input type="radio" name="conduct" value="3"></td>
+                                    <td><input type="radio" name="conduct" value="2"></td>
+                                    <td><input type="radio" name="conduct" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td>3. ทัศนคติ การแสดงความคิดเห็นและการแสดงออกที่มีต่องานที่ทำ</td>
+                                    <td><input type="radio" name="attitude" value="5"></td>
+                                    <td><input type="radio" name="attitude" value="4"></td>
+                                    <td><input type="radio" name="attitude" value="3"></td>
+                                    <td><input type="radio" name="attitude" value="2"></td>
+                                    <td><input type="radio" name="attitude" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td>4. ความรับผิดชอบ</td>
+                                    <td><input type="radio" name="responsibility" value="5"></td>
+                                    <td><input type="radio" name="responsibility" value="4"></td>
+                                    <td><input type="radio" name="responsibility" value="3"></td>
+                                    <td><input type="radio" name="responsibility" value="2"></td>
+                                    <td><input type="radio" name="responsibility" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td>5. การให้ความร่วมมือและมนุษยสัมพันธ์</td>
+                                    <td><input type="radio" name="cooperation" value="5"></td>
+                                    <td><input type="radio" name="cooperation" value="4"></td>
+                                    <td><input type="radio" name="cooperation" value="3"></td>
+                                    <td><input type="radio" name="cooperation" value="2"></td>
+                                    <td><input type="radio" name="cooperation" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td>6. ความสามารถในการเรียนรู้งานที่ได้รับมอบหมาย</td>
+                                    <td><input type="radio" name="learning_ability" value="5"></td>
+                                    <td><input type="radio" name="learning_ability" value="4"></td>
+                                    <td><input type="radio" name="learning_ability" value="3"></td>
+                                    <td><input type="radio" name="learning_ability" value="2"></td>
+                                    <td><input type="radio" name="learning_ability" value="1"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Total score and frequency -->
+                        <div class="mb-3">
+                            <label for="total_frequency" class="form-label">รวมความถี่</label>
+                            <input type="text" class="form-control" id="total_frequency" name="total_frequency"
+                                readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="total_score" class="form-label">รวมคะแนนทั้งสิ้น</label>
+                            <input type="text" class="form-control" id="total_score" name="total_score" readonly>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="comments" class="form-label">ข้อเสนอแนะเพิ่มเติม:</label>
+                            <textarea class="form-control" id="comments" name="comments" rows="3"></textarea>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">บันทึกการประเมิน</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <script>
+            // Function to search for a student and fill the form automatically
+            function searchStudent() {
+                var searchQuery = document.getElementById('search').value;
+
+                // AJAX request to fetch student data
+                $.ajax({
+                    url: 'search_student.php',
+                    method: 'GET',
+                    data: { search: searchQuery },
+                    success: function (response) {
+                        var student = JSON.parse(response);
+                        if (student) {
+                            // Fill the form with student data
+                            document.getElementById('student_name').value = student.name;
+                            document.getElementById('student_id').value = student.student_id;
+                            document.getElementById('company_name').value = student.company_name;
+                            document.getElementById('department_position').value = student.department_position;
+                        } else {
+                            alert("ไม่พบข้อมูลนักศึกษาที่ค้นหา");
+                        }
+                    }
+                });
+            }
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>

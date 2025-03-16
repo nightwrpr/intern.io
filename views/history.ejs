@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=block">
+    <title>ประวัติการฝึกประสบการณ์</title>
+</head>
+
+<body>
+    <div id="sidebar-container"></div>
+    <%- include('partials/sidebar', { user: session.user }) %>
+    
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header d-flex justify-content-between align-items-center">
+            <span class="material-symbols-outlined">menu</span>
+            <h5 class="mb-0">ประวัติการฝึกประสบการณ์</h5>
+            <span class="material-symbols-outlined">more_vert</span>
+        </div>
+
+        <div class="container mt-4">
+            <h4 class="text-center mb-4"><strong>ประวัติการฝึกประสบการณ์</strong></h4>
+            <table class="table table-bordered custom-table">
+                <thead>
+                    <tr class="table-primary">
+                        <th>ครั้งที่</th>
+                        <th>ชื่อสถานที่ฝึกงาน</th>
+                        <th>เริ่ม</th>
+                        <th>สิ้นสุด</th>
+                        <th>สถานะ</th>
+                        <th>รายละเอียด</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>บริษัท ABC จำกัด</td>
+                        <td>01/01/2024</td>
+                        <td>30/06/2024</td>
+                        <td><span class="badge bg-success">อยู่ระหว่างการฝึกประสบการณ์</span></td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#historyModal">
+                                รายละเอียด
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="historyModalLabel">รายละเอียดการฝึกงาน</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card shadow p-4">
+                            <h4 class="text-center mb-4"><strong>รายละเอียดการฝึกงาน</strong></h4>
+                            <div class="mb-3">
+                                <label class="fw-bold">ชื่อสถานที่ฝึกงาน:</label>
+                                <p>บริษัท ABC จำกัด</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="fw-bold">ที่อยู่ของสถานที่ฝึกงาน:</label>
+                                <p>123/45 ถนนพัฒนาการ, กรุงเทพฯ</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="fw-bold">แผนก/ตำแหน่งที่ฝึกงาน:</label>
+                                <p>ฝ่ายการตลาด (Marketing Department)</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="fw-bold">ระยะเวลาการฝึกงาน:</label>
+                                <p>เริ่ม: 01/01/2024 - สิ้นสุด: 30/06/2024</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="fw-bold">สถานะ:</label>
+                                <span class="badge bg-success">อยู่ระหว่างการฝึกประสบการณ์</span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="fw-bold">อาจารย์ที่ปรึกษา:</label>
+                                <p>ผศ.ดร.ชานันท์ โทร: 081-xxx-xxxx</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="fw-bold">พี่เลี้ยง:</label>
+                                <p>นายพงศ์พิภัทธ์ (ผู้จัดการฝ่ายทรัพยากรบุคคล) โทร: 089-xxx-xxxx</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer.html') %>
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+
+</html>

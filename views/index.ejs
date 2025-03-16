@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=block">
+
+    <title>Student Dashboard</title>
+</head>
+
+<body>
+    <div id="sidebar-container"></div>
+    <%- include('partials/sidebar', { user: user }) %> <!-- ส่งข้อมูล user ไปที่ sidebar -->
+
+        <div class="main-content">
+            <div class="header">
+                <span class="material-symbols-outlined">menu</span>
+                <h5 class="mb-0">แดชบอร์ดนักศึกษา</h5>
+                <span class="material-symbols-outlined">more_vert</span>
+            </div>
+
+            <div class="content mt-4">
+                <h2><strong>ยินดีต้อนรับ</strong></h2>
+
+                <!-- Card for Student Information -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><strong>ข้อมูลของนักศึกษา</strong></h5>
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p><strong>
+                                    ชื่อ: <%= user.name %>
+                                            อีเมล: <%= user.email %><br>
+                                                        สาขาวิชา: <%= student.major || 'ไม่มีข้อมูล' %><br>
+                                                            สถานะ: <%= student.status || 'ยังไม่มีข้อมูล' %>
+                                </strong><br><br>
+                            </p>
+                        </blockquote>
+                    </div>
+                </div>
+
+                <!-- Cards Container -->
+                <div class="container">
+                    <div class="row">
+                        <!-- รายงาน Card -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><span
+                                            class="material-symbols-outlined">analytics</span>รายงาน</h5>
+                                    <p class="card-text">ดูรายงานข้อมูลที่เกี่ยวข้องกับการฝึกประสบการณ์</p>
+                                    <a href="/student/reports" class="btn btn-primary">ดูรายละเอียด</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- การตั้งค่า Card -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><span
+                                            class="material-symbols-outlined">settings</span>การตั้งค่า</h5>
+                                    <p class="card-text">ปรับแต่งการตั้งค่าของระบบสำหรับนักศึกษา</p>
+                                    <a href="/student/settings" class="btn btn-primary">ดูรายละเอียด</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-container"></div>
+        <!-- รวม footer -->
+        <%- include('partials/footer.html') %>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+                crossorigin="anonymous"></script>
+</body>
+
+</html>

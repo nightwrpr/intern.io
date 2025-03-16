@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title><%= title %></title>
+    <style>
+        /* Modal Style */
+        #details-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 60%;
+            max-width: 800px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        button {
+            background-color: #000080;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: rgba(0, 0, 128, 0.8);
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="sidebar-container"></div>
+    <%- include('partials/sidebar', { user: teacher }) %>
+
+    <div class="main-content">
+        <div class="header d-flex justify-content-between align-items-center p-3 border-bottom">
+            <h5 class="mb-0">รายละเอียดคำขอฝึกงาน</h5>
+        </div>
+
+        <div class="container mt-4">
+            <h3>คำขอจาก <%= request.user_name %></h3>
+            <p><strong>สถานประกอบการ:</strong> <%= request.company_name %></p>
+            <p><strong>ตำแหน่งงาน:</strong> <%= request.position_name %></p>
+            <p><strong>วันที่อนุมัติ:</strong> <%= request.approval_date %></p>
+            <p><strong>อาจารย์ที่อนุมัติ:</strong> <%= teacher.name %></p>
+            <p><strong>สถานะคำขอ:</strong> <%= request.approval_status %></p>
+        </div>
+
+        <div class="container mt-4">
+            <button onclick="showDetails('<%= request.student_id %>')" class="btn btn-info">ดูรายละเอียดเพิ่มเติม</button>
+        </div>
+
+        <div class="container mt-4">
+            <a href="/listofrequests" class="btn btn-primary">กลับสู่หน้ารายการคำขอฝึกงาน</a>
+        </div>
+    </div>
+
+    <!-- Modal for Details -->
+    <div id="details-modal" class="modal">
+        <div class="modal-content">
+            <h3>รายละเอียดคำร้อง</h3>
+            <p><strong>ชื่อ:</strong> <span id="detail-name"></span></p>
+            <p><strong>รหัสนักศึกษา:</strong> <span id="detail-student-id"></span></p>
+            <p><strong>ชื่อสถานประกอบการ:</strong> <span id="detail-company"></span></p>
+            <p><strong>ตำแหน่งที่ต้องการฝึก:</strong> <span id="detail-position"></span></p>
+            <p><strong>วันที่เริ่มฝึก:</strong> <input type="date" id="detail-start-date-input"></p>
+            <p><strong>วันที่สิ้นสุดการฝึก:</strong> <input type="date" id="detail-end-date-input"></p>
+            <p><strong>เอกสารที่แนบ:</strong></p>
+            <ul>
+                <li><a href="#" id="detail-resume" target="_blank">Resume</a></li>
+                <li><a href="#" id="detail-transcript" target="_blank">Transcript</a></li>
+                <li><a href="#" id="detail-id-card" target="_blank">ID Card</a></li>
+            </ul>
+            <div class="button-container">
+                <button onclick="approveRequest('<%= request.student_id %>')" style="background-color: green;">อนุมัติ</button>
+                <button onclick="rejectRequest('<%= request.student_id %>')" style="background-color: red;">ไม่อนุมัติ</button>
+            </div>
+            <br>
+            <div class="button-container">
+                <button onclick="closeDetails()">ปิดรายละเอียด</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    <%- include('partials/footer.html') %>
+
+    <script>
+        function showDetails(studentId) {
+            var details = {
+                '<%= request.student_id %>': {
+                    name: '<%= request.student_name %>',
+                    studentId: '<%= request.student_id %>',
+                    company: '<%= request.company_name %>',
+                    position: '<%= request.job_title %>',
+                    startDate: '<%= request.start_date %>',
+                    endDate: '<%= request.end_date %>',
+                    resume: '<%= request.resume_url %>',
+                    transcript: '<%= request.transcript_url %>',
+                    idCard: '<%= request.id_card_url %>'
+                }
+            };
+
+            var data = details[studentId];
+            document.getElementById('detail-name').innerText = data.name;
+            document.getElementById('detail-student-id').innerText = data.studentId;
+            document.getElementById('detail-company').innerText = data.company;
+            document.getElementById('detail-position').innerText = data.position;
+            document.getElementById('detail-start-date-input').value = data.startDate;
+            document.getElementById('detail-end-date-input').value = data.endDate;
+            document.getElementById('detail-resume').setAttribute('href', data.resume);
+            document.getElementById('detail-transcript').setAttribute('href', data.transcript);
+            document.getElementById('detail-id-card').setAttribute('href', data.idCard);
+            document.getElementById('details-modal').style.display = 'flex';
+        }
+
+        function closeDetails() {
+            document.getElementById('details-modal').style.display = 'none';
+        }
+
+        function approveRequest(studentId) {
+            var startDate = document.getElementById('detail-start-date-input').value;
+            var endDate = document.getElementById('detail-end-date-input').value;
+
+            alert('คำร้องได้รับการอนุมัติ! วันที่เริ่มฝึก: ' + startDate + ', วันที่สิ้นสุด: ' + endDate);
+            closeDetails();
+        }
+
+        function rejectRequest(studentId) {
+            alert('คำร้องไม่ได้รับการอนุมัติ!');
+            closeDetails();
+        }
+    </script>
+</body>
+
+</html>

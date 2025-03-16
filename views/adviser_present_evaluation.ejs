@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฟอร์มการประเมิน</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #000080;
+        }
+
+        .category {
+            margin-top: 30px;
+        }
+
+        .category h2 {
+            color: #000080;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #000080;
+            color: white;
+        }
+
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            text-align: center;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #000080;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+        .left-align {
+            text-align: left;
+            /* ทำให้ข้อความใน <td> ชิดซ้าย */
+            padding-left: 15px;
+            /* เพิ่มระยะห่างทางซ้าย */
+        }
+        .comment-section {
+            margin-top: 20px;
+        }
+
+        .comment-section textarea {
+            width: 100%;
+            padding: 10px;
+            height: 100px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>แบบฟอร์มการประเมินการนำเสนอ</h1>
+        <form action="/submit_assessment" method="post">
+            <table>
+                <tr>
+                    <th>หัวข้อการประเมิน</th>
+                    <th>คะแนนเต็ม</th>
+                    <th>คะแนนที่ได้</th>
+                </tr>
+                <tr>
+                    <td class="left-align">1. เนื้อหาครบถ้วนตามหัวข้อที่กำหนด</td>
+                    <td>15</td>
+                    <td><input type="number" name="score1" max="15" min="0" required></td>
+                </tr>
+                <tr>
+                    <td class="left-align">2. รูปแบบของสื่อเหมาะสมกับเนื้อหาที่นำเสนอ</td>
+                    <td>5</td>
+                    <td><input type="number" name="score2" max="5" min="0" required></td>
+                </tr>
+                <tr>
+                    <td class="left-align">3. ความสวยงามของสื่อที่ใช้</td>
+                    <td>5</td>
+                    <td><input type="number" name="score3" max="5" min="0" required></td>
+                </tr>
+                <tr>
+                    <td class="left-align">4. การใช้ภาษาในการนำเสนอ</td>
+                    <td>5</td>
+                    <td><input type="number" name="score4" max="5" min="0" required></td>
+                </tr>
+                <tr>
+                    <td class="left-align">5. การตอบคำถาม</td>
+                    <td>10</td>
+                    <td><input type="number" name="score5" max="10" min="0" required></td>
+                </tr>
+                <tr>
+                    <td class="left-align">6. นำเสนอภายในเวลาที่กำหนด</td>
+                    <td>5</td>
+                    <td><input type="number" name="score6" max="5" min="0" required></td>
+                </tr>
+                <tr>
+                    <td class="left-align">7. บุคลิกภาพและการแต่งกาย</td>
+                    <td>5</td>
+                    <td><input type="number" name="score7" max="5" min="0" required></td>
+                </tr>
+                <tr>
+                    <th>รวมคะแนนทั้งสิ้น (คะแนนเต็ม 50 คะแนน)</th>
+                    <th>50</th>
+                    <th><p id="totalScore">--</p></th>
+                </tr>
+            </table>
+            <div class="comment-section">
+                <label for="additionalComments">แสดงความคิดเห็นเพิ่มเติม:</label>
+                <textarea name="additionalComments" id="additionalComments"
+                    placeholder="กรุณาใส่ความคิดเห็นของคุณที่นี่..." required></textarea>
+            </div>
+            <button type="submit">ส่งการประเมิน</button>
+        </form>
+    </div>
+
+    <script>
+        function calculateTotal() {
+            let total = 0;
+            const scores = document.querySelectorAll('input[type="number"]');
+            scores.forEach(input => {
+                total += parseInt(input.value) || 0; // คำนวณผลรวมจากคะแนนที่กรอก
+            });
+            document.getElementById('totalScore').textContent = total;
+        }
+
+        const inputs = document.querySelectorAll('input[type="number"]');
+        inputs.forEach(input => {
+            input.addEventListener('input', calculateTotal); // คำนวณคะแนนรวมเมื่อกรอกข้อมูล
+        });
+    </script>
+</body>
+
+</html>

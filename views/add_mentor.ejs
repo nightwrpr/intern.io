@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เพิ่มพี่เลี้ยง</title>
+</head>
+<body>
+    <h1>เพิ่มพี่เลี้ยง</h1>
+
+    <form action="/admin/add-mentor" method="POST">
+        <label for="mentor_name">ชื่อพี่เลี้ยง:</label>
+        <input type="text" id="mentor_name" name="mentor_name" required><br><br>
+
+        <label for="mentor_email">อีเมล์พี่เลี้ยง:</label>
+        <input type="email" id="mentor_email" name="mentor_email" required><br><br>
+
+        <label for="mentor_phone">เบอร์โทรพี่เลี้ยง:</label>
+        <input type="text" id="mentor_phone" name="mentor_phone" required><br><br>
+
+        <label for="company_id">บริษัท:</label>
+        <input type="text" id="company_id" name="company_id" required><br><br>
+
+        <label for="user_id">ID ผู้ใช้:</label>
+        <input type="text" id="user_id" name="user_id" required><br><br>
+
+        <button type="submit">เพิ่มพี่เลี้ยง</button>
+    </form>
+
+    <br>
+    <a href="/admin/dashboard">กลับไปยังหน้าหลัก</a>
+</body>
+</html>

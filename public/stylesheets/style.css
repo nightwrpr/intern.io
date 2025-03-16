@@ -1,0 +1,397 @@
+/* log in */
+/* Bordered form */
+form {
+  border: 3px solid #f1f1f1;
+  
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #000080;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  background-color: rgba(0, 0, 128, 0.2);
+  /* สีพื้นหลังน้ำเงินอ่อน */
+  color: #000080;
+  /* เปลี่ยนสีตัวอักษรเป็นสีน้ำเงินเข้ม */
+}
+
+/* Extra style for the cancel button (red) *
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+/* Avatar image */
+img.avatar {
+  width: 40%;
+  border-radius: 0%;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+}
+
+/* The "Forgot password" text */
+span.psw {
+  float: inline-block;;
+  padding-top: 0px;
+  vertical-align: middle; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
+}
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+}
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #b7c4cc; /* สีพื้นหลังให้ดูทันสมัย */
+  color: white; /* สีตัวอักษรให้เป็นสีขาว */
+  border-right: 1px solid #ddd;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  padding: 20px;
+  box-sizing: border-box; /* เพื่อให้ padding ไม่ล้นออกนอก */
+  font-family: 'Arial', sans-serif; /* ใช้ฟอนต์ที่อ่านง่าย */
+}
+.name {
+  text-align: left;
+  /* จัดข้อความให้กึ่งกลาง */
+}
+
+.name p {
+  padding: 0px;
+  /* เพิ่มช่องว่างในข้อความ */
+  border-radius: 5px;
+  /* ทำมุมโค้ง */
+  transition: background-color 0.3s ease;
+  /* ทำให้พื้นหลังเปลี่ยนอย่างนุ่มนวล */
+}
+
+/* เมื่อเมาส์ hover */
+.name p:hover {
+  background-color: rgba(0, 0, 128, 0.2);
+  /* สีพื้นหลังน้ำเงินอ่อน */
+  color: #000080;
+  /* เปลี่ยนสีตัวอักษรเป็นสีน้ำเงินเข้ม */
+}
+
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 20px 0;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  /* จัดไอคอนและข้อความให้อยู่ในแถวเดียวกัน */
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar a .material-symbols-outlined {
+  margin-right: 10px;
+  /* เพิ่มระยะห่างระหว่างไอคอนและข้อความ */
+  font-size: 20px;
+  /* ปรับขนาดของไอคอน */
+  vertical-align: middle;
+  /* ทำให้ไอคอนอยู่ตรงกลางกับข้อความ */
+}
+
+.sidebar a:hover {
+  background-color: rgba(0, 0, 128, 0.2);
+  color: #000080;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  /* ลบระยะห่างของ <ul> */
+}
+
+.sidebar li {
+  margin: 5px 0;
+  /* ลดระยะห่างระหว่างรายการใน Sidebar */
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  display: block;
+  /* ให้ลิงก์เป็นบล็อก */
+  padding: 10px 15px;
+  /* เพิ่มช่องว่างภายในเพื่อให้เหมือนกล่อง */
+  border-radius: 5px;
+  /* มุมกล่องโค้ง */
+  transition: background-color 0.3s ease;
+  /* เพิ่มการเปลี่ยนสีอย่างนุ่มนวล */
+}
+
+/* เมื่อเมาส์ hover หรือคลิก */
+.sidebar a:hover,
+.sidebar a:focus {
+  background-color: rgba(0, 0, 128, 0.2);
+  /* สีพื้นหลังโปร่งใส สีฟ้าอ่อน */
+  color: #000080;
+  /* เปลี่ยนสีตัวอักษร */
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+}
+
+body {
+  display: flex;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+
+
+/* Main Content */
+.main-content {
+  margin-left: 270px; /* ระยะห่างจาก Sidebar */
+  padding: 20px; /* เพิ่ม Padding รอบเนื้อหา */
+  width: 100%; /* กำหนดความกว้างเต็มหน้าจอ */
+  padding-top: 90px; /* เพิ่มระยะห่างจากด้านบน */
+  background-color: #f9f9f9; /* สีพื้นหลัง */
+  min-height: 100vh; /* ความสูงเต็มหน้าจอ */
+  box-sizing: border-box; /* ทำให้ Padding ไม่ล้น */
+}
+
+.header {
+  background-color: #000080;
+  /* พื้นหลังสีน้ำเงินเข้ม */
+  color: white;
+  /* สีตัวอักษรเป็นสีขาว */
+  padding: 15px 30px;
+  /* ระยะห่างภายใน */
+  position: fixed;
+  /* ใช้ fixed เพื่อให้คงที่ */
+  top: 0;
+  right: 0;
+  /* ทำให้ชิดขอบขวาของหน้าจอ */
+  width: calc(100% - 250px);
+  /* คำนวณความกว้างให้เหลือพื้นที่ Sidebar */
+  box-sizing: border-box;
+  /* คำนวณ Padding และ Border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* เพิ่มเงาให้กับ header */
+  display: flex;
+  /* ใช้ Flexbox */
+  justify-content: space-between;
+  /* จัดตำแหน่งให้ข้อความและไอคอนอยู่ห่างกัน */
+  align-items: center;
+  /* จัดให้ไอคอนและข้อความอยู่แนวเดียวกัน */
+  gap: 15px;
+  /* เพิ่มระยะห่างระหว่างองค์ประกอบ */
+}
+
+.header h5 {
+  margin: 0;
+  /* เอาระยะห่างที่เกิดจาก h5 ออก */
+  flex-grow: 1;
+  /* ทำให้ h5 ใช้พื้นที่ว่าง */
+  white-space: nowrap;
+  /* ห้ามแบ่งข้อความใน h5 */
+}
+
+.header .material-symbols-outlined {
+  font-size: 24px;
+  /* ปรับขนาดไอคอน */
+  cursor: pointer;
+  /* เปลี่ยน cursor เมื่อชี้ที่ไอคอน */
+  vertical-align: middle;
+  /* จัดไอคอนให้ตรงกลางกับข้อความ */
+}
+
+/* การ์ดข้อมูลส่วนตัว */
+.card {
+  margin-top: 20px;
+}
+
+/* การ์ดเมื่อชี้ */
+.card:hover {
+  transform: translateY(-5px);
+  /* ทำให้การ์ดลอยขึ้น */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* เพิ่มเงาให้การ์ด */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* เพิ่มการเปลี่ยนแปลงที่นุ่มนวล */
+}
+
+.card-title .material-symbols-outlined {
+  vertical-align: middle;
+  /* จัดให้ไอคอนอยู่ตรงกลางกับข้อความ */
+  margin-right: 8px;
+  /* เพิ่มระยะห่างระหว่างไอคอนและข้อความ */
+}
+
+/* สีปุ่มให้เหมือนเมนูใน sidebar */
+.card .btn-primary {
+  background-color: #000080;
+  /* สีน้ำเงินเข้ม */
+  border-color: #000080;
+  /* สีน้ำเงินเข้ม */
+}
+
+.card .btn-primary:hover {
+  background-color: rgba(0, 0, 128, 0.2);
+  /* สีพื้นหลังโปร่งใส สีฟ้าอ่อน */
+  color: #000080;
+  /* เปลี่ยนสีตัวอักษร */
+}
+
+.card-header {
+  background-color: #000080;
+  /* พื้นหลังสีน้ำเงิน */
+  color: white;
+  /* ตัวอักษรสีขาว */
+  padding: 15px;
+  /* เพิ่มระยะห่างภายใน */
+}
+
+.card-header h5 {
+  margin: 0;
+  /* เอาระยะห่างที่เกิดจาก h5 ออก */
+}
+
+.card-body blockquote {
+  font-size: 16px;
+  /* ลดขนาดตัวอักษร */
+  line-height: 1.6;
+  /* เพิ่มระยะห่างระหว่างบรรทัด */
+  color: #333;
+  /* เปลี่ยนสีตัวอักษรเป็นสีเข้มเพื่อให้อ่านง่าย */
+}
+
+.card-body blockquote p {
+  margin-bottom: 10px;
+  /* เพิ่มระยะห่างระหว่างพารากราฟ */
+}
+
+.card-body blockquote strong {
+  font-weight: bold;
+  /* ทำให้ตัวอักษรที่มี <strong> หนา */
+}
+
+.footer {
+  background-color: #000080;
+  color: white;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+
+
+/* แถบค้นหา */
+.search-bar {
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.search-result {
+  margin-top: 20px;
+}
+
+/* เปลี่ยนสีปุ่มเมื่อ hover */
+.search-bar .btn {
+  background-color: #000080;
+  /* สีพื้นหลังของปุ่ม */
+  color: white;
+  /* สีข้อความ */
+  border-color: #000080;
+  /* สีของกรอบปุ่ม */
+}
+
+.search-bar .btn:hover {
+  background-color: rgba(0, 0, 128, 0.2) !important;
+  /* สีพื้นหลังโปร่งใส สีฟ้าอ่อน */
+  color: #000080 !important;
+  /* เปลี่ยนสีตัวอักษร */
+}
+
+/* เปลี่ยนสีไอคอนภายในปุ่ม */
+.search-bar .btn i {
+  color: white;
+  /* เปลี่ยนสีไอคอน */
+}
+
+
+/* ตารางสถานประกอบการ */
+.table th {
+  text-align: center;
+  /* จัดข้อความให้กึ่งกลางในแนวนอน */
+  vertical-align: middle;
+  /* จัดข้อความให้กึ่งกลางในแนวตั้ง */
+}
+
+/* จัดปุ่มให้ตรงกลาง */
+.table td {
+  text-align: center;
+  /* จัดข้อความให้กึ่งกลางในแนวนอน */
+  vertical-align: middle;
+  /* จัดข้อความให้กึ่งกลางในแนวตั้ง */
+}
+
+td .btn-info {
+  background-color: #000080 !important;
+  color: white !important;
+  border: none !important;
+}
+
+td .btn-info:hover {
+  background-color: rgba(0, 0, 128, 0.2) !important;
+  /* สีพื้นหลังโปร่งใส สีฟ้าอ่อน */
+  color: #000080 !important;
+  /* เปลี่ยนสีตัวอักษร */
+}

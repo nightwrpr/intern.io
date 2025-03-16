@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=block">
+    <title>อาจารย์ - ประเมินนักศึกษา</title>
+</head>
+
+<body>
+    <div id="sidebar-container"></div>
+    <%- include('partials/sidebar', { user: session.user }) %>
+    
+
+        <div class="container mt-4">
+            <h1 class="text-center mb-4">ระบบประเมินผลนักศึกษา</h1>
+
+            <!-- Search Section -->
+            <div class="card mb-4">
+                <div class="search-bar">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="searchInput" placeholder="ค้นหาชื่อหรือตำแหน่ง"
+                            aria-label="ค้นหางาน" onkeyup="searchJobs()">
+                        <button class="btn btn-primary" type="button">
+                            <i class="bi bi-search"></i> ค้นหา
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ชื่อ</th>
+                                <th>รหัสนักศึกษา</th>
+                                <th>แผนก/ตำแหน่ง</th>
+                                <th>คะแนนหัวข้อที่ 1</th>
+                                <th>คะแนนหัวข้อที่ 2</th>
+                                <th>คะแนนหัวข้อที่ 3</th>
+                                <th>คะแนนรวม</th>
+                                <th>การจัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (students && students.length > 0) { %>
+                                <% students.forEach(function(student) { %>
+                                    <tr>
+                                        <td><%= student.student_name %></td>
+                                        <td><%= student.student_id %></td>
+                                        <td><%= student.program || 'ไม่ระบุ' %></td>
+                                        <td><%= student.score1 || 0 %></td>
+                                        <td><%= student.score2 || 0 %></td>
+                                        <td><%= student.score3 || 0 %></td>
+                                        <td><%= student.total_score || 0 %></td>
+                                        <td><a href="/professor/evaluate/<%= student.student_id %>" class="btn btn-primary">บันทึกคะแนน</a></td>
+                                    </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="8" class="text-center">ไม่มีข้อมูลนักศึกษา</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer container -->
+        <%- include('partials/footer.html') %>
+            <div id="footer-container"></div>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+                crossorigin="anonymous"></script>
+
+            <script>
+                // คำนวณคะแนนรวมอัตโนมัติ
+                document.querySelectorAll('.score-input').forEach(input => {
+                    input.addEventListener('input', updateTotalScore);
+                });
+
+                function updateTotalScore() {
+                    let total = 0;
+                    document.querySelectorAll('.score-input').forEach(input => {
+                        total += parseInt(input.value) || 0;
+                    });
+                    document.getElementById('total-score').value = total;
+                }
+            </script>
+
+            <script>
+                // ฟังก์ชันค้นหางาน
+                function searchJobs() {
+                    var input, filter, table, tr, td, i, txtValue;
+                    input = document.getElementById("searchInput");
+                    filter = input.value.toLowerCase(); // ค้นหาเป็นตัวพิมพ์เล็ก
+                    table = document.querySelector("table");
+                    tr = table.getElementsByTagName("tr");
+
+                    // วนลูปผ่านทุกแถวในตาราง
+                    for (i = 1; i < tr.length; i++) {  // เริ่มจากแถวที่ 1 (ไม่รวมแถวหัวตาราง)
+                        td = tr[i].getElementsByTagName("td");
+                        if (td.length > 0) {
+                            // ตรวจสอบในคอลัมน์ที่ 2 (ชื่อสถานประกอบการ), คอลัมน์ที่ 3 (ตำแหน่งงาน)
+                            var siteName = td[1].textContent || td[1].innerText;
+                            var jobPosition = td[2].textContent || td[2].innerText;
+
+                            // หากข้อความในชื่อสถานประกอบการหรือตำแหน่งงานตรงกับคำค้นหา
+                            if (siteName.toLowerCase().indexOf(filter) > -1 || jobPosition.toLowerCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";  // แสดงแถว
+                            } else {
+                                tr[i].style.display = "none";  // ซ่อนแถว
+                            }
+                        }
+                    }
+                }
+            </script>
+</body>
+
+</html>

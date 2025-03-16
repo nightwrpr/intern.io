@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฟอร์มการประเมินนิเทศงาน</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #000080;
+        }
+
+        .category {
+            margin-top: 30px;
+        }
+
+        .category h2 {
+            color: #000080;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #000080;
+            color: white;
+        }
+
+        td input[type="radio"] {
+            margin: 5px;
+        }
+
+        .total-section {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .total-section span {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #000080;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .left-align {
+            text-align: left;
+            /* ทำให้ข้อความใน <td> ชิดซ้าย */
+            padding-left: 15px;
+            /* เพิ่มระยะห่างทางซ้าย */
+        }
+
+        .comment-section {
+            margin-top: 20px;
+        }
+
+        .comment-section textarea {
+            width: 100%;
+            padding: 10px;
+            height: 100px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('partials/sidebar', { user: teacher }) %>
+
+    <div class="container">
+        <h1>แบบฟอร์มการประเมินนิเทศงาน</h1>
+        <form action="/submit_assessment" method="post">
+            <table>
+                <thead>
+                    <tr>
+                        <th>หัวข้อการประเมิน</th>
+                        <th>ดีเยี่ยม</th>
+                        <th>ดี</th>
+                        <th>ปานกลาง</th>
+                        <th>พอใช้</th>
+                        <th>ควรปรับปรุง</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="left-align">1. บุคลิกภาพ วุฒิภาวะ และการแต่งกาย</td>
+                        <td><input type="radio" name="q1.1" value="5"></td>
+                        <td><input type="radio" name="q1.1" value="4"></td>
+                        <td><input type="radio" name="q1.1" value="3"></td>
+                        <td><input type="radio" name="q1.1" value="2"></td>
+                        <td><input type="radio" name="q1.1" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-align">2. ความประพฤติและปฏิบัติตามระเบียบวินัยองค์กร</td>
+                        <td><input type="radio" name="q2.1" value="5"></td>
+                        <td><input type="radio" name="q2.1" value="4"></td>
+                        <td><input type="radio" name="q2.1" value="3"></td>
+                        <td><input type="radio" name="q2.1" value="2"></td>
+                        <td><input type="radio" name="q2.1" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-align">3. ทัศนคติ การแสดงความคิดเห็นและการแสดงออกที่มีต่องานที่ทำ</td>
+                        <td><input type="radio" name="q3.1" value="5"></td>
+                        <td><input type="radio" name="q3.1" value="4"></td>
+                        <td><input type="radio" name="q3.1" value="3"></td>
+                        <td><input type="radio" name="q3.1" value="2"></td>
+                        <td><input type="radio" name="q3.1" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-align">4. ความรับผิดชอบ</td>
+                        <td><input type="radio" name="q4.1" value="5"></td>
+                        <td><input type="radio" name="q4.1" value="4"></td>
+                        <td><input type="radio" name="q4.1" value="3"></td>
+                        <td><input type="radio" name="q4.1" value="2"></td>
+                        <td><input type="radio" name="q4.1" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-align">5. การให้ความร่วมมือและมนุษยสัมพันธ์</td>
+                        <td><input type="radio" name="q5.1" value="5"></td>
+                        <td><input type="radio" name="q5.1" value="4"></td>
+                        <td><input type="radio" name="q5.1" value="3"></td>
+                        <td><input type="radio" name="q5.1" value="2"></td>
+                        <td><input type="radio" name="q5.1" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-align">6. ความสามารถในการเรียนรู้งานที่ได้รับมอบหมาย</td>
+                        <td><input type="radio" name="q6.1" value="5"></td>
+                        <td><input type="radio" name="q6.1" value="4"></td>
+                        <td><input type="radio" name="q6.1" value="3"></td>
+                        <td><input type="radio" name="q6.1" value="2"></td>
+                        <td><input type="radio" name="q6.1" value="1"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="total-section">
+                <p>รวมคะแนนทั้งหมด: <span id="totalScore">0</span></p>
+            </div>
+            <div class="comment-section">
+                <label for="additionalComments">แสดงความคิดเห็นเพิ่มเติม:</label>
+                <textarea name="additionalComments" id="additionalComments"
+                    placeholder="กรุณาใส่ความคิดเห็นของคุณที่นี่..." required></textarea>
+            </div>
+            <button type="submit">ส่งการประเมิน</button>
+        </form>
+    </div>
+
+    <script>
+        // คำนวณคะแนนเมื่อเลือกตัวเลือก
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+
+        radioButtons.forEach(button => {
+            button.addEventListener('change', calculateTotal);
+        });
+
+        function calculateTotal() {
+            let total = 0;
+            radioButtons.forEach(button => {
+                if (button.checked) {
+                    total += parseInt(button.value);
+                }
+            });
+            document.getElementById('totalScore').textContent = total;
+        }
+    </script>
+</body>
+
+</html>

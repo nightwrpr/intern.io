@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายชื่อบริษัทที่เปิดรับนักศึกษาฝึกงาน</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=block">
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h2 {
+            color: #fffefe;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 80%;
+            max-width: 600px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #000080;
+            color: white;
+        }
+
+        button {
+            background-color: #000080;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: rgba(0, 0, 128, 0.8);
+            transform: scale(1.05);
+        }
+
+        #company-details-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 60%;
+            max-width: 800px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .modal-content h3 {
+            text-align: center;
+            color: #000080;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        #search-input {
+            width: 100%;
+            max-width: 800px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="sidebar-container"></div>
+    <%- include('partials/sidebar', { user: student }) %> <!-- ส่งข้อมูล student ไปที่ sidebar -->
+    
+    <div class="main-content">
+        <div class="header">
+            <span class="material-symbols-outlined">menu</span>
+            <h2>รายชื่อบริษัทที่เปิดรับนักศึกษาฝึกงาน</h2>
+            <span class="material-symbols-outlined">more_vert</span>
+        </div>
+    <input type="text" id="search-input" placeholder="ค้นหาชื่อบริษัทหรือตำแหน่งงาน..." onkeyup="filterCompanies()">
+
+    <table>
+        <thead>
+            <tr>
+                <th>ชื่อบริษัท</th>
+                <th>ตำแหน่งงาน</th>
+                <th>รายละเอียด</th>
+            </tr>
+        </thead>
+        <tbody id="company-table">
+            <!-- ข้อมูลบริษัทจะถูกแสดงที่นี่ -->
+        </tbody>
+    </table>
+
+    <div id="company-details-modal">
+        <div class="modal-content">
+            <h3>รายละเอียดตำแหน่งงาน</h3>
+            <p><strong>ชื่อบริษัท:</strong> <span id="modal-company-name"></span></p>
+            <p><strong>ตำแหน่งงาน:</strong> <span id="modal-position-title"></span></p>
+            <p><strong>จำนวนที่เปิดรับ:</strong> <span id="modal-vacancies"></span></p>
+            <p><strong>รายละเอียดงาน:</strong> <span id="modal-job-description"></span></p>
+            <p><strong>ที่อยู่:</strong> <span id="modal-address"></span></p>
+            <p><strong>เบอร์โทร:</strong> <span id="modal-phone"></span></p>
+            <p><strong>อีเมล:</strong> <span id="modal-email"></span></p>
+
+            <div class="button-container">
+                <button onclick="closeModal()">ปิด</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="footer-container"></div>
+        <!-- รวม footer -->
+        <%- include('partials/footer.html') %>
+
+    <script>
+        var companies = <%- JSON.stringify(companies) %>; // Dynamic data from server
+
+        function createCompanyTable(companiesList) {
+            var tableBody = document.getElementById('company-table');
+            tableBody.innerHTML = ''; // ลบข้อมูลเดิมก่อน
+
+            companiesList.forEach(function (company) {
+                company.positions.forEach(function (position) {
+                    var row = document.createElement('tr');
+
+                    var nameCell = document.createElement('td');
+                    nameCell.innerText = company.name;
+                    row.appendChild(nameCell);
+
+                    var positionCell = document.createElement('td');
+                    positionCell.innerText = position.position_name;
+                    row.appendChild(positionCell);
+
+                    var detailsCell = document.createElement('td');
+                    var detailsButton = document.createElement('button');
+                    detailsButton.innerText = 'ดูรายละเอียด';
+                    detailsButton.onclick = function () { showCompanyDetails(company, position); };
+                    detailsCell.appendChild(detailsButton);
+                    row.appendChild(detailsCell);
+
+                    tableBody.appendChild(row);
+                });
+            });
+        }
+
+        function showCompanyDetails(company, position) {
+            document.getElementById('modal-company-name').innerText = company.name;
+            document.getElementById('modal-position-title').innerText = position.position_name;
+            document.getElementById('modal-vacancies').innerText = position.number_of_open;
+            document.getElementById('modal-job-description').innerText = position.description;
+            document.getElementById('modal-address').innerText = company.address;
+            document.getElementById('modal-phone').innerText = company.phone_number || 'ไม่ระบุ';
+            document.getElementById('modal-email').innerText = company.email || 'ไม่ระบุ';
+
+            document.getElementById('company-details-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('company-details-modal').style.display = 'none';
+        }
+
+        function filterCompanies() {
+            var searchInput = document.getElementById('search-input').value.toLowerCase();
+
+            var filteredCompanies = companies.filter(function (company) {
+                return company.name.toLowerCase().includes(searchInput) || company.positions.some(function (position) {
+                    return position.position_name.toLowerCase().includes(searchInput);
+                });
+            });
+
+            createCompanyTable(filteredCompanies);
+        }
+
+        createCompanyTable(companies);
+    </script>
+</body>
+
+</html>

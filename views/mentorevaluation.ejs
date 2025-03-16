@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=block">
+    <title>พี่เลี้ยง - ประเมินนักศึกษา</title>
+</head>
+
+<body>
+    <div id="sidebar-container"></div>
+    <%- include('partials/sidebar', { user: session.user }) %>
+    
+
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">ระบบประเมินผลนักศึกษา</h1>
+
+        <!-- Search Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>ค้นหานักศึกษา</h5>
+            </div>
+            <div class="card-body">
+                <form class="row g-3">
+                    <div class="col-md-6">
+                        <label for="studentName" class="form-label">ชื่อนักศึกษา</label>
+                        <input type="text" class="form-control" id="studentName" placeholder="กรอกชื่อนักศึกษา">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="studentId" class="form-label">รหัสนักศึกษา</label>
+                        <input type="text" class="form-control" id="studentId" placeholder="กรอกรหัสนักศึกษา">
+                    </div>
+                    <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-primary">ค้นหา</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Evaluation Form -->
+        <div class="card">
+            <div class="container mt-4">
+                <h2 class="text-center"><strong>แบบประเมินผลการปฏิบัติงานของนักศึกษา</strong></h2>
+
+                <p><strong>ชื่อ - สกุล นักศึกษา:</strong> __________________________</p>
+                <p><strong>รหัสประจำตัว:</strong> __________________________</p>
+                <p><strong>สาขาวิชา:</strong> คณะบริหารธุรกิจและการบัญชี มหาวิทยาลัยขอนแก่น</p>
+                <p><strong>แผนก/ตำแหน่งที่ฝึกปฏิบัติ:</strong> __________________________</p>
+
+
+                <table class="table table-bordered text-center mt-4">
+                    <thead>
+                        <tr>
+                            <th>หัวข้อการประเมิน</th>
+                            <th>รายละเอียด</th>
+                            <th>5</th>
+                            <th>4</th>
+                            <th>3</th>
+                            <th>2</th>
+                            <th>1</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Section 1 -->
+                        <tr>
+                            <td rowspan="2">1. ความรู้และความสามารถในการทำงาน</td>
+                            <td style="text-align: left;">1.1 คุณภาพงาน</td>
+                            <td><input type="radio" name="quality" value="5"></td>
+                            <td><input type="radio" name="quality" value="4"></td>
+                            <td><input type="radio" name="quality" value="3"></td>
+                            <td><input type="radio" name="quality" value="2"></td>
+                            <td><input type="radio" name="quality" value="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">1.2 ความสามารถในการเรียนรู้และประยุกต์วิชาการ</td>
+                            <td><input type="radio" name="learning" value="5"></td>
+                            <td><input type="radio" name="learning" value="4"></td>
+                            <td><input type="radio" name="learning" value="3"></td>
+                            <td><input type="radio" name="learning" value="2"></td>
+                            <td><input type="radio" name="learning" value="1"></td>
+                        </tr>
+
+                        <!-- Section 2 -->
+                        <tr>
+                            <td rowspan="6">2. ความรับผิดชอบในการปฏิบัติงาน</td>
+                            <td style="text-align: left;">2.1 ความรับผิดชอบและเป็นผู้ที่ไว้วางใจได้</td>
+                            <td><input type="radio" name="responsibility" value="5"></td>
+                            <td><input type="radio" name="responsibility" value="4"></td>
+                            <td><input type="radio" name="responsibility" value="3"></td>
+                            <td><input type="radio" name="responsibility" value="2"></td>
+                            <td><input type="radio" name="responsibility" value="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">2.2 การตรงต่อเวลา</td>
+                            <td><input type="radio" name="punctuality" value="5"></td>
+                            <td><input type="radio" name="punctuality" value="4"></td>
+                            <td><input type="radio" name="punctuality" value="3"></td>
+                            <td><input type="radio" name="punctuality" value="2"></td>
+                            <td><input type="radio" name="punctuality" value="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">2.3 ความสนใจ อุตสาหะ และมุ่งมั่นทำงานให้สำเร็จ</td>
+                            <td><input type="radio" name="working_attention" value="5"></td>
+                            <td><input type="radio" name="working_attention" value="4"></td>
+                            <td><input type="radio" name="working_attention" value="3"></td>
+                            <td><input type="radio" name="working_attention" value="2"></td>
+                            <td><input type="radio" name="working_attention" value="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">2.4 ความเอาใจใส่ต่อผู้รับบริการ</td>
+                            <td><input type="radio" name="customer_attention" value="5"></td>
+                            <td><input type="radio" name="customer_attention" value="4"></td>
+                            <td><input type="radio" name="customer_attention" value="3"></td>
+                            <td><input type="radio" name="customer_attention" value="2"></td>
+                            <td><input type="radio" name="customer_attention" value="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">2.5 ความสามารถเริ่มต้นทำงานได้ด้วยตนเอง</td>
+                            <td><input type="radio" name="self_performance" value="5"></td>
+                            <td><input type="radio" name="self_performance" value="4"></td>
+                            <td><input type="radio" name="self_performance" value="3"></td>
+                            <td><input type="radio" name="self_performance" value="2"></td>
+                            <td><input type="radio" name="self_performance" value="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">2.6 การตอบสนองต่อการสั่งการ</td>
+                            <td><input type="radio" name="response" value="5"></td>
+                            <td><input type="radio" name="response" value="4"></td>
+                            <td><input type="radio" name="response" value="3"></td>
+                            <td><input type="radio" name="response" value="2"></td>
+                            <td><input type="radio" name="response" value="1"></td>
+                        </tr>
+
+                        <!-- Section 3 -->
+                        <tr>
+                            <td rowspan="8">3. ลักษณะส่วนบุคคล</td>
+                            <td style="text-align: left;">3.1 บุคลิกภาพ</td>
+                            <td><input type="radio" name="personality" value="5"></td>
+                            <td><input type="radio" name="personality" value="4"></td>
+                            <td><input type="radio" name="personality" value="3"></td>
+                            <td><input type="radio" name="personality" value="2"></td>
+                            <td><input type="radio" name="personality" value="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">3.2 มนุษยสัมพันธ์และการทำงานร่วมกับผู้อื่น</td>
+                            <td><input type="radio" name="interpersonal" value="5"></td>
+                            <td><input type="radio" name="interpersonal" value="4"></td>
+                            <td><input type="radio" name="interpersonal" value="3"></td>
+                            <td><input type="radio" name="interpersonal" value="2"></td>
+                            <td><input type="radio" name="interpersonal" value="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">3.3 การวางตัวและการปรับตัวเข้ากับองค์กรได้เหมาะสม</td>
+                            <td><input type="radio" name="interpersonal" value="5"></td>
+                            <td><input type="radio" name="interpersonal" value="4"></td>
+                            <td><input type="radio" name="interpersonal" value="3"></td>
+                            <td><input type="radio" name="interpersonal" value="2"></td>
+                            <td><input type="radio" name="interpersonal" value="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">3.4 การรู้จักประมาณตน</td>
+                            <td><input type="radio" name="interpersonal" value="5"></td>
+                            <td><input type="radio" name="interpersonal" value="4"></td>
+                            <td><input type="radio" name="interpersonal" value="3"></td>
+                            <td><input type="radio" name="interpersonal" value="2"></td>
+                            <td><input type="radio" name="interpersonal" value="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">3.5 ความมีระเบียบวินัย</td>
+                            <td><input type="radio" name="interpersonal" value="5"></td>
+                            <td><input type="radio" name="interpersonal" value="4"></td>
+                            <td><input type="radio" name="interpersonal" value="3"></td>
+                            <td><input type="radio" name="interpersonal" value="2"></td>
+                            <td><input type="radio" name="interpersonal" value="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">3.6 คุณธรรมและจริยธรรม</td>
+                            <td><input type="radio" name="interpersonal" value="5"></td>
+                            <td><input type="radio" name="interpersonal" value="4"></td>
+                            <td><input type="radio" name="interpersonal" value="3"></td>
+                            <td><input type="radio" name="interpersonal" value="2"></td>
+                            <td><input type="radio" name="interpersonal" value="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">3.7 ทักษะการสื่อสารและการนําเสนอ</td>
+                            <td><input type="radio" name="interpersonal" value="5"></td>
+                            <td><input type="radio" name="interpersonal" value="4"></td>
+                            <td><input type="radio" name="interpersonal" value="3"></td>
+                            <td><input type="radio" name="interpersonal" value="2"></td>
+                            <td><input type="radio" name="interpersonal" value="1"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">3.8 ความคิดสร้างสรรค์ในการปฏิบัติงาน</td>
+                            <td><input type="radio" name="interpersonal" value="5"></td>
+                            <td><input type="radio" name="interpersonal" value="4"></td>
+                            <td><input type="radio" name="interpersonal" value="3"></td>
+                            <td><input type="radio" name="interpersonal" value="2"></td>
+                            <td><input type="radio" name="interpersonal" value="1"></td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2"><strong>รวมคะแนน</strong></td>
+                            <td colspan="5">________________________</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><strong>รวมทั้งสิ้น (คะแนนเต็ม 80 คะแนน)</strong></td>
+                            <td colspan="5">________________________</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
