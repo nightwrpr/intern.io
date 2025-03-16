@@ -6,7 +6,7 @@ const db = mysql.createConnection({
   password: 'GX5eOIi9IQxzurBlGn70',  // ใส่ password ของคุณ
   database: 'bugpitvpmnkgbgqz45r7',  // ชื่อฐานข้อมูลที่ใช้
   port: 3306,
-  ssl: { rejectUnauthorized: true }
+  ssl: { rejectUnauthorized: false }
 
 });
 
