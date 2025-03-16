@@ -8,7 +8,11 @@ router.use(session({
   secret: 'your-secret-key',
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false, httpOnly: true, maxAge: 1000 * 60 * 60 } // อายุ session 1 ชั่วโมง
+  cookie: { 
+    secure: process.env.NODE_ENV === 'production',  // ใช้ HTTPS ในสภาพแวดล้อม production
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 // อายุ session 1 ชั่วโมง
+  } // อายุ session 1 ชั่วโมง
 }));
 
 /* GET Login Page */
