@@ -37,6 +37,8 @@ var app = express();
 // View engine setup
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+app.set('trust proxy', 1);
+
 
 app.engine('html', ejs.renderFile);
 
@@ -47,6 +49,9 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: process.env.NODE_ENV === 'production' }
 }));
+
+const cors = require('cors');
+app.use(cors({ origin: 'https://kkbs-internship-github-io.onrender.com', credentials: true }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
